@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Payment Form Section -->
+    <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+        <h2 class="text-2xl font-semibold text-center mb-6">Payment Information</h2>
+
+        <form id="paymentForm" action="#" method="POST">
+            <!-- Name Field -->
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" id="name" name="name"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" id="email" name="email"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- Credit Card Field -->
+            <div class="mb-4">
+                <label for="creditCard" class="block text-sm font-medium text-gray-700">Credit Card Number</label>
+                <input type="text" id="creditCard" name="creditCard"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- Expiry Date Field -->
+            <div class="mb-4">
+                <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                <input type="month" id="expiry" name="expiry"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- CVV Field -->
+            <div class="mb-4">
+                <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                <input type="text" id="cvv" name="cvv"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>
+            </div>
+
+            <!-- Payment Amount Section -->
+            <div class="mb-4">
+                <label for="plan" class="block text-sm font-medium text-gray-700">Select Plan</label>
+                <div class="flex space-x-4 mt-2">
+                    <!-- Basic Plan -->
+                    <div>
+                        <input type="radio" id="basic" name="plan" value="799" class="form-radio h-4 w-4 text-blue-500"
+                            checked>
+                        <label for="basic" class="ml-2 text-sm font-medium text-gray-700">Basic (₹799)</label>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div>
+                        <input type="radio" id="premium" name="plan" value="1599"
+                            class="form-radio h-4 w-4 text-blue-500">
+                        <label for="premium" class="ml-2 text-sm font-medium text-gray-700">Premium (₹1599)</label>
+                    </div>
+
+                    <!-- Elite Plan -->
+                    <div>
+                        <input type="radio" id="elite" name="plan" value="3199"
+                            class="form-radio h-4 w-4 text-blue-500">
+                        <label for="elite" class="ml-2 text-sm font-medium text-gray-700">Elite (₹3199)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Amount Display -->
+            <div class="mb-4">
+                <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                <input type="text" id="amount" name="amount" value="799"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    readonly>
+            </div>
+
+
+            <!-- Redirect using <a> tag -->
+            <a href="https://www.paypal.com/in/home" id="paymentLink">
+                <button type="button" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+                    Proceed to Payment
+                </button>
+            </a>
+            <!-- Back to Home Button -->
+            <a href="index.html" class="w-full text-center block mb-4">
+                <button type="button" class="w-full bg-gray-300 mt-5 text-gray-800 py-2 rounded-md hover:bg-gray-400">
+                    Back to Home
+                </button>
+            </a>
+        </form>
+    </div>
+
+    <script>
+        // Example of basic form validation
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const creditCard = document.getElementById('creditCard').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (!name || !email || !creditCard || !expiry || !cvv) {
+                alert('Please fill in all fields!');
+                event.preventDefault();
+            } else {
+                alert('Payment Submitted!'); // Here, you would integrate with a payment API like Stripe or PayPal
+            }
+        });
+    </script>
+    <script>
+        // Get all radio buttons
+        const planRadios = document.querySelectorAll('input[name="plan"]');
+        const amountField = document.getElementById('amount');
+
+        // Listen for changes on the radio buttons
+        planRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                // Update the amount field with the value of the selected radio button
+                amountField.value = this.value;
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
